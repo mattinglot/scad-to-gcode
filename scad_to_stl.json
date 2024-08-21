@@ -1,0 +1,11 @@
+{
+    "scad_file": "./gridfinity_basic_cup_flat_no_label_no_attachments.scad",
+    "variables": {
+        "width": [1, 2, 3, 4, 5],
+        "depth": [1, 2, 3, 4, 5],
+        "height": [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
+    "subfolder_format": "{height}U",
+    "filename_format": "box_{width}x{depth}x{height}.stl",
+    "base_output_dir": "../Extended Flat No Label No Attachments"
+}
