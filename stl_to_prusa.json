@@ -1,0 +1,6 @@
+{
+    "prusaslicer_path": "C:/Program Files/Prusa3D/PrusaSlicer/prusa-slicer-console.exe",
+    "base_project_file": "C:/My Project Path Goes Here/Settings.ini",
+    "stl_folder": "C:/My Project Path Goes Here/Stls",
+    "output_folder": "C:/My Project Path Goes Here/GCode"
+}
