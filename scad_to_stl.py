@@ -10,7 +10,7 @@ openscad_path = "C:\\Program Files\\OpenSCAD (Nightly)\\openscad.exe"  # Modify 
 # Function to load configuration from a JSON file
 def load_config(config_file):
     with open(config_file, 'r') as file:
-        config = json.load(file)
+        config = json.load(file, object_pairs_hook=dict)  # Preserve order
     return config
 
 # Function to sanitize filenames by removing invalid characters
@@ -37,7 +37,8 @@ base_output_dir = config["base_output_dir"]
 os.makedirs(base_output_dir, exist_ok=True)
 
 # Get the keys and ranges from the variables
-keys, ranges = zip(*variables.items())
+keys = list(variables.keys())
+ranges = [variables[key] for key in keys]
 
 # Loop through all possible combinations of the specified variables
 for combination in product(*ranges):

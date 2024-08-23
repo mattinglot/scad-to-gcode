@@ -1,11 +1,12 @@
 {
     "scad_file": "./gridfinity_basic_cup.scad",
     "variables": {
+        "label_style" : ["disabled"],
+        "height": [2, 3, 4, 5, 6, 7, 8, 9, 10],
         "width": [1, 2, 3, 4, 5],
-        "depth": [1, 2, 3, 4, 5],
-        "height": [2, 3, 4, 5, 6, 7, 8, 9, 10]
+        "depth": [1, 2, 3, 4, 5]
     },
     "subfolder_format": "{height}U",
     "filename_format": "box_{width}x{depth}x{height}.stl",
-    "base_output_dir": "../Extended Flat No Label No Attachments"
+    "base_output_dir": "./output/Extended No Label"
 }
