@@ -1,5 +1,5 @@
 {
-    "scad_file": "./gridfinity_basic_cup_flat_no_label_no_attachments.scad",
+    "scad_file": "./gridfinity_basic_cup.scad",
     "variables": {
         "width": [1, 2, 3, 4, 5],
         "depth": [1, 2, 3, 4, 5],
