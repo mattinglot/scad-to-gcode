@@ -1,11 +1,3 @@
-"""
-Copyright (c) 2024 Matt Inglot
-
-This file is part of a project that is licensed under the MIT License.
-
-For details, see the LICENSE.md file in the root directory of this project.
-"""
-
 import os
 import subprocess
 import json
@@ -20,6 +12,10 @@ def load_config(config_file):
     with open(config_file, 'r') as file:
         config = json.load(file)
     return config
+
+# Function to sanitize filenames by removing invalid characters
+def sanitize_filename(filename):
+    return filename.replace("\"", "").replace(" ", "_")
 
 # Check if a config file is passed as a command-line argument
 if len(sys.argv) != 2:
@@ -53,17 +49,28 @@ for combination in product(*ranges):
     subfolder_path = os.path.join(base_output_dir, subfolder_name)
     os.makedirs(subfolder_path, exist_ok=True)
     
-    # Format the filename based on the current variables
-    output_filename = filename_format.format(**current_vars)
+    # Format the filename based on the current variables, sanitize it for invalid characters
+    output_filename = sanitize_filename(filename_format.format(**current_vars))
     output_path = os.path.join(subfolder_path, output_filename)
     
     # Build the OpenSCAD command with the variable definitions
     cmd = [openscad_path, "-o", output_path]
     for key, value in current_vars.items():
+        # Add quotes around string values for OpenSCAD
+        if isinstance(value, str):
+            value = f'"{value}"'
         cmd.extend(["-D", f"{key}={value}"])
     cmd.append(scad_file)
+
+    # Output the current variables and the OpenSCAD command
+    print(f"\nGenerating STL with variables: {current_vars}")
+    print(f"OpenSCAD Command: {' '.join(cmd)}")
     
     # Run the OpenSCAD command
-    subprocess.run(cmd, check=True)
+    try:
+        subprocess.run(cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while generating {output_filename}: {e}")
+        continue
 
 print("STL files generated and stored in respective subfolders successfully.")
